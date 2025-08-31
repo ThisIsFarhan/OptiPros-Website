@@ -1,0 +1,126 @@
+# OptiPros Website Development Prompt for Replit Agent
+
+Create a professional, modern website for **OptiPros** - an innovative optical prosthetic device designed to assist visually impaired individuals. This is a Final Year Project (FYP) showcasing cutting-edge assistive technology.
+
+## Website Overview
+- **Project Name**: OptiPros (Optical Prosthetic for Visually Impaired)
+- **Purpose**: Blind assistance device with advanced sensing and AI capabilities
+- **Target Audience**: Researchers, investors, visually impaired community, academic reviewers
+- **Tone**: Professional, accessible, innovative, empathetic
+
+## Required Navigation Structure
+Create a responsive website with the following navigation tabs:
+1. **Home** - Hero section with project overview
+2. **Features** - Detailed explanation of the three modes
+3. **Technology** - Technical highlights and innovation points
+4. **Gallery** - Images and labeled diagrams
+5. **Team** - Team member profiles
+6. **Contact** - Contact form and information
+
+## Page Content Requirements
+
+### Home Page
+- **Hero Section**: Large, prominent image of a person wearing the OptiPros device
+- **Project Tagline**: Something impactful about empowering independence for the visually impaired
+- **Brief Overview**: 2-3 sentences explaining what OptiPros is and its mission
+- **Key Benefits**: Highlight privacy, independence, and advanced technology
+- **Call-to-action**: "Learn More" buttons directing to Features page
+
+### Features Page
+Detail the three core modes:
+
+**1. Path Sensing Mode**
+- Explain the H-shaped detection frame concept
+- Describe the frequency-based feedback system:
+  - Higher frequency beeps for objects directly in front
+  - Lower frequency beeps for objects at the bottom
+  - Differentiated signals for left and right detection
+- Emphasize real-time obstacle detection
+
+**2. Scene Description Mode**
+- Highlight the use of on-device AI models
+- Emphasize privacy benefits (no cloud dependency)
+- Explain how it provides real-time environmental awareness
+- Mention optimization for local processing
+
+**3. Text Reading Mode**
+- Describe text recognition capabilities
+- Explain how it assists with reading signs, documents, labels
+- Highlight accuracy and speed
+
+### Technology Page
+- **Innovation Highlights**: What makes OptiPros unique
+- **Privacy Focus**: On-device processing, no data transmission
+- **AI Integration**: Local machine learning models
+- **Hardware Design**: Lightweight, wearable, durable
+- **User-Centric Approach**: Designed with visually impaired community input
+- Note: "Technical specifications available upon request"
+
+### Gallery Page
+- Placeholder sections for:
+  - Device images (multiple angles)
+  - Person wearing the device (different scenarios)
+  - Labeled technical diagrams
+  - User interaction demonstrations
+- Professional image layout with captions
+
+### Team Page
+- Placeholder sections for team member profiles
+- Include: Names, roles, brief descriptions
+- Professional layout with photo placeholders
+
+### Contact Page
+- **Contact Form** with fields:
+  - Name (required)
+  - Email (required)
+  - Subject (required)
+  - Message (required)
+  - Submit button
+- **Project Information**: 
+  - "This is a Final Year Project (FYP)"
+  - "For academic inquiries, collaboration opportunities, or more information"
+- **Note**: "Detailed technical documentation available upon request"
+
+## Design Requirements
+- **Modern, clean, professional design**
+- **Accessibility-focused** (high contrast, screen reader friendly)
+- **Responsive design** (mobile, tablet, desktop)
+- **Color scheme**: Professional blues/grays with accent colors suggesting innovation
+- **Typography**: Clean, readable fonts
+- **Smooth animations** and transitions
+- **Professional imagery placeholders** where actual images will be added later
+
+## Technical Requirements
+- Responsive HTML5/CSS3/JavaScript
+- Clean, semantic code structure
+- Fast loading times
+- Cross-browser compatibility
+- SEO-friendly structure
+- Form validation for contact form
+- Smooth scrolling navigation
+
+## Content Tone Guidelines
+- **Professional but approachable**
+- **Empowering and hopeful** regarding assistive technology
+- **Innovation-focused** highlighting cutting-edge features
+- **Privacy-conscious** emphasizing local processing benefits
+- **Academic credibility** as this is an FYP
+- **Avoid overly technical jargon** - keep explanations accessible
+
+## Special Instructions
+- DO NOT include phone numbers or specific contact details yet
+- Leave space for easy image integration later
+- Ensure all content is placeholder-ready for real images and diagrams
+- Focus on the three modes as the core value proposition
+- Emphasize the privacy and independence aspects throughout
+- Make the website feel like a legitimate, innovative tech project
+- Include subtle mentions that this is academic research (FYP)
+
+## Call-to-Action Elements
+- "Learn About Our Features"
+- "Discover the Technology"
+- "Meet Our Team"
+- "Get in Touch"
+- "Request Technical Documentation"
+
+Create a website that positions OptiPros as a groundbreaking, professional assistive technology project that prioritizes user privacy, independence, and innovation.
