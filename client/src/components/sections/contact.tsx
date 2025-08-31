@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { GraduationCap, University, Handshake, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,26 +63,6 @@ export default function Contact() {
     contactMutation.mutate(data);
   };
 
-  const projectInfo = [
-    {
-      icon: University,
-      title: "Academic Institution",
-      description: "COMSATS University Islamabad, Lahore Campus",
-      color: "bg-primary",
-    },
-    {
-      icon: GraduationCap,
-      title: "Project Type",
-      description: "Final Year Project (FYP) - Assistive Technology Research",
-      color: "bg-accent",
-    },
-    {
-      icon: Handshake,
-      title: "Collaboration Opportunities",
-      description: "Academic inquiries, research partnerships, and technical collaboration welcome",
-      color: "bg-secondary",
-    },
-  ];
 
 
   return (
@@ -95,31 +75,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="text-2xl font-bold text-card-foreground mb-6">Final Year Project Information</h3>
-              <div className="space-y-6">
-                {projectInfo.map((info, index) => {
-                  const IconComponent = info.icon;
-                  return (
-                    <div key={index} className="flex items-start space-x-4" data-testid={`project-info-${index}`}>
-                      <div className={`w-12 h-12 ${info.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                        <IconComponent className="h-6 w-6 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-card-foreground mb-2">{info.title}</h4>
-                        <p className="text-muted-foreground">{info.description}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-          </div>
-
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
           <div className="bg-card rounded-xl p-8 border border-border">
             <h3 className="text-2xl font-bold text-card-foreground mb-6">Send us a Message</h3>

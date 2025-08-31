@@ -80,22 +80,6 @@ export default function Team() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <div className="bg-muted rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-foreground mb-4">Final Year Project Team</h3>
-            <p className="text-muted-foreground mb-6">
-              OptiPros is being developed as a Final Year Project at COMSATS University Lahore, combining academic research with practical innovation to create meaningful assistive technology.
-            </p>
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 h-auto font-semibold"
-              data-testid="meet-team-cta"
-            >
-              <Users className="mr-2 h-5 w-5" />
-              Meet Our Team
-            </Button>
-          </div>
-        </div>
       </div>
     </section>
   );
