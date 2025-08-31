@@ -21,7 +21,7 @@ export default function Hero() {
             <p className="text-xl text-primary-foreground/90 mb-8 fade-in" style={{ animationDelay: "0.2s" }}>
               OptiPros is a cutting-edge optical prosthetic device that combines advanced sensing technology with on-device AI to assist visually impaired individuals in navigating their world with confidence and privacy.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start fade-in" style={{ animationDelay: "0.4s" }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start fade-in mb-8" style={{ animationDelay: "0.4s" }}>
               <Button
                 onClick={() => scrollToSection("features")}
                 className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 h-auto font-semibold"
@@ -39,6 +39,13 @@ export default function Hero() {
                 <ServerCog className="mr-2 h-5 w-5" />
                 Discover the Technology
               </Button>
+            </div>
+            <div className="flex justify-center lg:justify-start fade-in" style={{ animationDelay: "0.6s" }}>
+              <img
+                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300"
+                alt="Person wearing OptiPros device demonstrating hands-free operation"
+                className="rounded-xl shadow-lg w-full max-w-md h-auto"
+              />
             </div>
           </div>
           <div className="relative fade-in" style={{ animationDelay: "0.6s" }}>
