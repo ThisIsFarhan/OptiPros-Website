@@ -2,8 +2,8 @@ import { exec } from 'child_process';
 
 console.log('Starting OptiPros frontend...');
 
-// Start Vite for frontend-only development
-const viteProcess = exec('npx vite --host 0.0.0.0 --port 5000', (error, stdout, stderr) => {
+// Start Vite for frontend-only development with allowed hosts
+const viteProcess = exec('npx vite --host 0.0.0.0 --port 5000 --config vite.frontend.config.ts', (error, stdout, stderr) => {
   if (error) {
     console.error(`Vite error: ${error}`);
     return;
