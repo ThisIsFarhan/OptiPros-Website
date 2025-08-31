@@ -1,4 +1,4 @@
-import { Compass } from "lucide-react";
+
 
 export default function Gallery() {
   const deviceImages = [
@@ -87,23 +87,7 @@ export default function Gallery() {
           </div>
         </div>
 
-        {/* Technical Diagrams */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center">Technical Diagrams</h3>
-          <div className="bg-card rounded-xl p-8 border border-border">
-            <div className="text-center">
-              <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center mb-4">
-                <div className="text-center">
-                  <Compass className="h-16 w-16 text-muted-foreground mb-4 mx-auto" />
-                  <p className="text-muted-foreground">Technical diagrams and system architecture</p>
-                  <p className="text-sm text-muted-foreground mt-2">Detailed schematics available in technical documentation</p>
-                </div>
-              </div>
-              <h4 className="font-semibold text-card-foreground mb-2">System Architecture</h4>
-              <p className="text-muted-foreground">Comprehensive technical diagrams showing H-shaped detection frame, AI processing pipeline, and component integration</p>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
   );
