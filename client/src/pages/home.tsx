@@ -6,7 +6,7 @@ import Features from "@/components/sections/features";
 import Technology from "@/components/sections/technology";
 import Gallery from "@/components/sections/gallery";
 import Team from "@/components/sections/team";
-import Contact from "@/components/sections/contact";
+import Contact from "@/components/sections/contact-simple";
 
 export default function Home() {
   useEffect(() => {
