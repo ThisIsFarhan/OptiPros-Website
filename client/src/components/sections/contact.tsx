@@ -1,0 +1,254 @@
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { GraduationCap, University, Handshake, FileText, ChartLine, Code, Video, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+
+const contactSchema = z.object({
+  name: z.string().min(1, "Name is required").min(2, "Name must be at least 2 characters"),
+  email: z.string().min(1, "Email is required").email("Please enter a valid email address"),
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(1, "Message is required").min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
+export default function Contact() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: ContactFormData) => {
+      const response = await apiRequest("POST", "/api/contact", data);
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your inquiry. We will get back to you soon.",
+      });
+      form.reset();
+      setIsSubmitting(false);
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error sending message",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    },
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    contactMutation.mutate(data);
+  };
+
+  const projectInfo = [
+    {
+      icon: University,
+      title: "Academic Institution",
+      description: "COMSATS University Islamabad, Lahore Campus",
+      color: "bg-primary",
+    },
+    {
+      icon: GraduationCap,
+      title: "Project Type",
+      description: "Final Year Project (FYP) - Assistive Technology Research",
+      color: "bg-accent",
+    },
+    {
+      icon: Handshake,
+      title: "Collaboration Opportunities",
+      description: "Academic inquiries, research partnerships, and technical collaboration welcome",
+      color: "bg-secondary",
+    },
+  ];
+
+  const availableResources = [
+    { icon: FileText, text: "Detailed technical documentation" },
+    { icon: ChartLine, text: "Performance analysis and test results" },
+    { icon: Code, text: "System architecture specifications" },
+    { icon: Video, text: "Demonstration videos and presentations" },
+  ];
+
+  return (
+    <section id="contact" className="py-20 bg-muted">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Interested in learning more about OptiPros? Contact us for collaboration opportunities, technical documentation, or academic inquiries.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Information */}
+          <div className="space-y-8">
+            <div className="bg-card rounded-xl p-8 border border-border">
+              <h3 className="text-2xl font-bold text-card-foreground mb-6">Final Year Project Information</h3>
+              <div className="space-y-6">
+                {projectInfo.map((info, index) => {
+                  const IconComponent = info.icon;
+                  return (
+                    <div key={index} className="flex items-start space-x-4" data-testid={`project-info-${index}`}>
+                      <div className={`w-12 h-12 ${info.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                        <IconComponent className="h-6 w-6 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-card-foreground mb-2">{info.title}</h4>
+                        <p className="text-muted-foreground">{info.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="bg-card rounded-xl p-8 border border-border">
+              <h3 className="text-xl font-bold text-card-foreground mb-4">Available Resources</h3>
+              <ul className="space-y-3 text-muted-foreground">
+                {availableResources.map((resource, index) => {
+                  const IconComponent = resource.icon;
+                  return (
+                    <li key={index} className="flex items-center" data-testid={`resource-${index}`}>
+                      <IconComponent className="h-5 w-5 text-primary mr-3" />
+                      <span>{resource.text}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="bg-card rounded-xl p-8 border border-border">
+            <h3 className="text-2xl font-bold text-card-foreground mb-6">Send us a Message</h3>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-testid="contact-form">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Name <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Your full name"
+                          {...field}
+                          data-testid="input-name"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Email <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="your.email@example.com"
+                          {...field}
+                          data-testid="input-email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Subject <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger data-testid="select-subject">
+                            <SelectValue placeholder="Select a subject" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="academic">Academic Inquiry</SelectItem>
+                          <SelectItem value="collaboration">Collaboration Opportunity</SelectItem>
+                          <SelectItem value="technical">Technical Documentation Request</SelectItem>
+                          <SelectItem value="research">Research Partnership</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Message <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          rows={5}
+                          placeholder="Tell us about your inquiry or interest in OptiPros..."
+                          className="resize-none"
+                          {...field}
+                          data-testid="textarea-message"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 h-auto font-semibold"
+                  disabled={isSubmitting}
+                  data-testid="button-submit"
+                >
+                  <Send className="mr-2 h-5 w-5" />
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
