@@ -40,13 +40,7 @@ export default function Hero() {
                 Discover the Technology
               </Button>
             </div>
-            <div className="flex justify-center lg:justify-start fade-in" style={{ animationDelay: "0.6s" }}>
-              <img
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300"
-                alt="Person wearing OptiPros device demonstrating hands-free operation"
-                className="rounded-xl shadow-lg w-full max-w-md h-auto"
-              />
-            </div>
+            
           </div>
           <div className="relative fade-in" style={{ animationDelay: "0.6s" }}>
             
