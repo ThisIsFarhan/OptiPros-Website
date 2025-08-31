@@ -1,4 +1,4 @@
-import { Shield, Brain, Feather, Users, FileText } from "lucide-react";
+import { Shield, Brain, Feather, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Technology() {
@@ -72,20 +72,6 @@ export default function Technology() {
           </div>
         </div>
 
-        <div className="mt-16 bg-muted rounded-xl p-8 text-center">
-          <h3 className="text-2xl font-bold text-foreground mb-4">Technical Specifications</h3>
-          <p className="text-muted-foreground mb-6">
-            Detailed technical documentation and specifications are available for researchers, academic reviewers, and collaboration inquiries.
-          </p>
-          <Button
-            onClick={() => scrollToSection("contact")}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 h-auto font-semibold"
-            data-testid="request-documentation"
-          >
-            <FileText className="mr-2 h-5 w-5" />
-            Request Technical Documentation
-          </Button>
-        </div>
       </div>
     </section>
   );

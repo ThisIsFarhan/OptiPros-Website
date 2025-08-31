@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { GraduationCap, University, Handshake, FileText, ChartLine, Code, Video, Send } from "lucide-react";
+import { GraduationCap, University, Handshake, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -84,12 +84,6 @@ export default function Contact() {
     },
   ];
 
-  const availableResources = [
-    { icon: FileText, text: "Detailed technical documentation" },
-    { icon: ChartLine, text: "Performance analysis and test results" },
-    { icon: Code, text: "System architecture specifications" },
-    { icon: Video, text: "Demonstration videos and presentations" },
-  ];
 
   return (
     <section id="contact" className="py-20 bg-muted">
@@ -124,20 +118,6 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="text-xl font-bold text-card-foreground mb-4">Available Resources</h3>
-              <ul className="space-y-3 text-muted-foreground">
-                {availableResources.map((resource, index) => {
-                  const IconComponent = resource.icon;
-                  return (
-                    <li key={index} className="flex items-center" data-testid={`resource-${index}`}>
-                      <IconComponent className="h-5 w-5 text-primary mr-3" />
-                      <span>{resource.text}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
           </div>
 
           {/* Contact Form */}
