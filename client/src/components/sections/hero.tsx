@@ -49,17 +49,7 @@ export default function Hero() {
             </div>
           </div>
           <div className="relative fade-in" style={{ animationDelay: "0.6s" }}>
-            <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-lg border border-border">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="font-semibold text-card-foreground">Privacy First</p>
-                  <p className="text-sm text-muted-foreground">On-device processing</p>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
