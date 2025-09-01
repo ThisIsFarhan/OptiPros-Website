@@ -1,0 +1,804 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiPros - Optical Prosthetic for Visually Impaired | COMSATS University FYP</title>
+    <meta name="description" content="OptiPros is an innovative optical prosthetic device designed to assist visually impaired individuals with advanced sensing and AI capabilities. A Final Year Project from COMSATS University Lahore.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["Inter", "system-ui", "sans-serif"],
+                }
+            },
+        }
+    };
+    </script>
+    
+    <style>
+        :root {
+            --background: hsl(210 40% 98%);
+            --foreground: hsl(210 40% 8%);
+            --card: hsl(210 40% 98%);
+            --card-foreground: hsl(210 40% 15%);
+            --popover: hsl(210 40% 98%);
+            --popover-foreground: hsl(210 40% 8%);
+            --primary: hsl(212 84% 25%);
+            --primary-foreground: hsl(210 40% 98%);
+            --secondary: hsl(210 20% 60%);
+            --secondary-foreground: hsl(210 40% 98%);
+            --muted: hsl(210 40% 96%);
+            --muted-foreground: hsl(210 40% 45%);
+            --accent: hsl(186 100% 50%);
+            --accent-foreground: hsl(210 40% 8%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(210 40% 98%);
+            --border: hsl(210 40% 85%);
+            --input: hsl(210 40% 90%);
+            --ring: hsl(212 84% 25%);
+            --radius: 0.75rem;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--foreground));
+            background-color: hsl(var(--background));
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: hsl(var(--accent));
+            transform: translateY(-1px);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        }
+    </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-background/90 backdrop-blur-sm border-b border-border z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-eye text-primary-foreground text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold text-foreground">OptiPros</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-foreground hover:text-accent font-medium">Home</a>
+                    <a href="#features" class="nav-link text-foreground hover:text-accent font-medium">Features</a>
+                    <a href="#technology" class="nav-link text-foreground hover:text-accent font-medium">Technology</a>
+                    <a href="#gallery" class="nav-link text-foreground hover:text-accent font-medium">Gallery</a>
+                    <a href="#team" class="nav-link text-foreground hover:text-accent font-medium">Team</a>
+                    <a href="#contact" class="nav-link text-foreground hover:text-accent font-medium">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-foreground">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-background border-t border-border">
+            <div class="px-4 py-3 space-y-3">
+                <a href="#home" class="block text-foreground hover:text-accent font-medium">Home</a>
+                <a href="#features" class="block text-foreground hover:text-accent font-medium">Features</a>
+                <a href="#technology" class="block text-foreground hover:text-accent font-medium">Technology</a>
+                <a href="#gallery" class="block text-foreground hover:text-accent font-medium">Gallery</a>
+                <a href="#team" class="block text-foreground hover:text-accent font-medium">Team</a>
+                <a href="#contact" class="block text-foreground hover:text-accent font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold text-primary-foreground mb-6">
+                        Empowering Independence Through
+                        <span class="text-accent">Innovation</span>
+                    </h1>
+                    <p class="text-xl text-primary-foreground/90 mb-8 max-w-2xl">
+                        OptiPros is a cutting-edge optical prosthetic device that combines advanced sensing technology and on-device AI to provide visually impaired individuals with unprecedented environmental awareness and independence.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#features" class="bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors">
+                            Learn About Our Features
+                        </a>
+                        <a href="#technology" class="border-2 border-primary-foreground text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary-foreground hover:text-primary transition-colors">
+                            Discover the Technology
+                        </a>
+                    </div>
+                    <div class="mt-8 text-primary-foreground/80 text-sm">
+                        <i class="fas fa-graduation-cap mr-2"></i>
+                        Final Year Project | COMSATS University Lahore
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <!-- Person wearing assistive technology device with clear focus on accessibility -->
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Person wearing OptiPros assistive technology device" 
+                         class="rounded-xl shadow-2xl w-full h-auto" data-mock="true" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    Revolutionary Features
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    OptiPros offers three core modes designed to provide comprehensive assistance for daily navigation and environmental awareness.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Path Sensing Mode -->
+                <div class="bg-card rounded-xl p-8 shadow-lg card-hover border border-border">
+                    <div class="feature-icon w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-route text-2xl text-primary-foreground"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-card-foreground mb-4">Path Sensing Mode</h3>
+                    <p class="text-muted-foreground mb-6">
+                        Advanced H-shaped detection frame provides real-time obstacle detection with intuitive frequency-based audio feedback.
+                    </p>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Higher frequency beeps for objects directly ahead
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Lower frequency alerts for ground-level obstacles
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Differentiated left and right detection signals
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Real-time environmental awareness
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Scene Description Mode -->
+                <div class="bg-card rounded-xl p-8 shadow-lg card-hover border border-border">
+                    <div class="feature-icon w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-2xl text-primary-foreground"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-card-foreground mb-4">Scene Description Mode</h3>
+                    <p class="text-muted-foreground mb-6">
+                        On-device AI models provide detailed environmental descriptions while maintaining complete privacy.
+                    </p>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Complete privacy with local processing
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Real-time environmental awareness
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            No cloud dependency or data transmission
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Optimized for local device processing
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Text Reading Mode -->
+                <div class="bg-card rounded-xl p-8 shadow-lg card-hover border border-border">
+                    <div class="feature-icon w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-text-height text-2xl text-primary-foreground"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-card-foreground mb-4">Text Reading Mode</h3>
+                    <p class="text-muted-foreground mb-6">
+                        Advanced text recognition capabilities for reading signs, documents, labels, and printed materials.
+                    </p>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            High accuracy text recognition
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Fast processing and response times
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Reads signs, documents, and labels
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-3"></i>
+                            Multiple language support
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="py-20 bg-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    Cutting-Edge Technology
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Our innovative approach combines advanced hardware design with privacy-focused AI processing to deliver unprecedented assistance capabilities.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <!-- Modern technology innovation showing advanced processing and AI capabilities -->
+                    <img src="https://pixabay.com/get/g827cb8dd36ee6366cf4db10135d876ea7447e5e2ccdee735d5fe867888ed75cf73ec3cc78a497553e58c8c0a00b726c5e41983b426057979747958785f818193_1280.jpg" 
+                         alt="Advanced AI processing and modern technology innovation" 
+                         class="rounded-xl shadow-lg w-full h-auto" data-mock="true" />
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-card rounded-lg p-6 border border-border">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary w-12 h-12 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-primary-foreground"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-card-foreground mb-2">Privacy-First Design</h3>
+                                <p class="text-muted-foreground">
+                                    All AI processing happens locally on the device, ensuring complete privacy with no data transmission to external servers.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card rounded-lg p-6 border border-border">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-accent w-12 h-12 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-microchip text-accent-foreground"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-card-foreground mb-2">Advanced AI Integration</h3>
+                                <p class="text-muted-foreground">
+                                    Optimized machine learning models provide real-time scene understanding and text recognition with minimal power consumption.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card rounded-lg p-6 border border-border">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-secondary w-12 h-12 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-feather text-secondary-foreground"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-card-foreground mb-2">Lightweight Hardware</h3>
+                                <p class="text-muted-foreground">
+                                    Ergonomic, durable design that's comfortable for extended daily use while maintaining professional aesthetics.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card rounded-lg p-6 border border-border">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-primary w-12 h-12 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-primary-foreground"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-card-foreground mb-2">User-Centric Approach</h3>
+                                <p class="text-muted-foreground">
+                                    Developed with extensive input from the visually impaired community to ensure practical, real-world usability.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <div class="bg-card rounded-lg p-6 border border-border inline-block">
+                    <p class="text-muted-foreground">
+                        <i class="fas fa-file-alt mr-2"></i>
+                        Detailed technical specifications available upon request
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    Device Gallery
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Explore OptiPros from different angles and see how our technology enhances daily life for visually impaired individuals.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Device Images -->
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg card-hover border border-border">
+                    <!-- Modern assistive technology device showing sleek design and innovation -->
+                    <img src="https://pixabay.com/get/gf3fd9978b503cda1d0620c33b3257c1fd26bed82334d3dd684629159800db594263ab45836a5c1ff1970a511f0b3e6fefefd0688d9a91534e65700b9c7aaf4bd_1280.jpg" 
+                         alt="OptiPros device front view showing modern design" 
+                         class="w-full h-64 object-cover" data-mock="true" />
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-card-foreground mb-2">Device Front View</h3>
+                        <p class="text-muted-foreground">Modern, ergonomic design optimized for daily wear</p>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg card-hover border border-border">
+                    <!-- Professional technology demonstration showing the device in use -->
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="OptiPros device being worn by user in everyday scenario" 
+                         class="w-full h-64 object-cover" data-mock="true" />
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-card-foreground mb-2">User Interaction</h3>
+                        <p class="text-muted-foreground">Seamless integration into daily activities</p>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg card-hover border border-border">
+                    <!-- Technical diagram showing innovative accessibility technology -->
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Technical diagram showing OptiPros component layout and features" 
+                         class="w-full h-64 object-cover" data-mock="true" />
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-card-foreground mb-2">Technical Diagram</h3>
+                        <p class="text-muted-foreground">Component layout and sensor positioning</p>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg card-hover border border-border">
+                    <!-- Advanced AI processing visualization -->
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="AI processing visualization showing machine learning capabilities" 
+                         class="w-full h-64 object-cover" data-mock="true" />
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-card-foreground mb-2">AI Processing</h3>
+                        <p class="text-muted-foreground">Real-time machine learning in action</p>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg card-hover border border-border">
+                    <!-- Accessibility demonstration showing independence and mobility -->
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Person demonstrating independence using assistive technology" 
+                         class="w-full h-64 object-cover" data-mock="true" />
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-card-foreground mb-2">Real-World Usage</h3>
+                        <p class="text-muted-foreground">Enhancing independence and mobility</p>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl overflow-hidden shadow-lg card-hover border border-border">
+                    <!-- Innovation and research development process -->
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Research and development process showing innovation workflow" 
+                         class="w-full h-64 object-cover" data-mock="true" />
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-card-foreground mb-2">Development Process</h3>
+                        <p class="text-muted-foreground">Research and innovation methodology</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    Meet Our Team
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    A dedicated team of students and researchers from COMSATS University Lahore, committed to advancing assistive technology through innovation and empathy.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-card rounded-xl p-8 text-center shadow-lg card-hover border border-border">
+                    <!-- Professional team collaboration showing diverse students working together -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400" 
+                         alt="Team member profile photo" 
+                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover" data-mock="true" />
+                    <h3 class="text-xl font-bold text-card-foreground mb-2" data-mock="true">Team Member Name</h3>
+                    <p class="text-accent font-medium mb-3" data-mock="true">Project Lead & AI Specialist</p>
+                    <p class="text-muted-foreground mb-4" data-mock="true">
+                        Leading the development of on-device AI models and ensuring privacy-focused implementation.
+                    </p>
+                    <div class="text-sm text-muted-foreground">
+                        <i class="fas fa-university mr-2"></i>
+                        COMSATS University Lahore
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="bg-card rounded-xl p-8 text-center shadow-lg card-hover border border-border">
+                    <!-- Professional team member showing dedication to assistive technology research -->
+                    <img src="https://pixabay.com/get/g98f64b2678f15dc42ce04945907008a21c09ac99c9b35b0f5158996ae98a51a445f44ebc4d906ae238d532f59ea9c3000e028183df61cd4f0a51cef936bd2df4_1280.jpg" 
+                         alt="Team member profile photo" 
+                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover" data-mock="true" />
+                    <h3 class="text-xl font-bold text-card-foreground mb-2" data-mock="true">Team Member Name</h3>
+                    <p class="text-accent font-medium mb-3" data-mock="true">Hardware Engineer</p>
+                    <p class="text-muted-foreground mb-4" data-mock="true">
+                        Designing the ergonomic hardware and sensor integration for optimal user experience.
+                    </p>
+                    <div class="text-sm text-muted-foreground">
+                        <i class="fas fa-university mr-2"></i>
+                        COMSATS University Lahore
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="bg-card rounded-xl p-8 text-center shadow-lg card-hover border border-border">
+                    <!-- Research team member focused on user experience and accessibility -->
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400" 
+                         alt="Team member profile photo" 
+                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover" data-mock="true" />
+                    <h3 class="text-xl font-bold text-card-foreground mb-2" data-mock="true">Team Member Name</h3>
+                    <p class="text-accent font-medium mb-3" data-mock="true">UX Researcher</p>
+                    <p class="text-muted-foreground mb-4" data-mock="true">
+                        Conducting user research and ensuring the device meets real-world accessibility needs.
+                    </p>
+                    <div class="text-sm text-muted-foreground">
+                        <i class="fas fa-university mr-2"></i>
+                        COMSATS University Lahore
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <div class="bg-card rounded-lg p-6 border border-border inline-block">
+                    <h3 class="text-lg font-semibold text-card-foreground mb-2">Academic Supervision</h3>
+                    <p class="text-muted-foreground">
+                        This Final Year Project is conducted under the guidance of distinguished faculty members at COMSATS University Lahore, ensuring academic rigor and innovation standards.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    Get in Touch
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Interested in learning more about OptiPros? Reach out for academic inquiries, collaboration opportunities, or detailed technical documentation.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border mb-8">
+                        <h3 class="text-2xl font-bold text-card-foreground mb-4">Project Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-graduation-cap text-accent mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-card-foreground">Final Year Project (FYP)</p>
+                                    <p class="text-muted-foreground">COMSATS University Lahore</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-lightbulb text-accent mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-card-foreground">Innovation Focus</p>
+                                    <p class="text-muted-foreground">Assistive Technology & AI Research</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-file-alt text-accent mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-card-foreground">Documentation</p>
+                                    <p class="text-muted-foreground">Detailed technical specifications available upon request</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h3 class="text-2xl font-bold text-card-foreground mb-4">Research Opportunities</h3>
+                        <p class="text-muted-foreground mb-4">
+                            We welcome academic inquiries, research collaboration opportunities, and discussions about advancing assistive technology for the visually impaired community.
+                        </p>
+                        <div class="flex flex-col space-y-3">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check text-accent"></i>
+                                <span class="text-muted-foreground">Academic collaboration</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check text-accent"></i>
+                                <span class="text-muted-foreground">Research partnerships</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check text-accent"></i>
+                                <span class="text-muted-foreground">Technical documentation sharing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <h3 class="text-2xl font-bold text-card-foreground mb-6">Contact Form</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-card-foreground mb-2">Name *</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground transition-colors" 
+                                   placeholder="Your full name">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-card-foreground mb-2">Email *</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground transition-colors" 
+                                   placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-card-foreground mb-2">Subject *</label>
+                            <select id="subject" name="subject" required 
+                                    class="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground transition-colors">
+                                <option value="">Select a subject</option>
+                                <option value="academic">Academic Inquiry</option>
+                                <option value="collaboration">Collaboration Opportunity</option>
+                                <option value="technical">Technical Documentation Request</option>
+                                <option value="research">Research Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-card-foreground mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground transition-colors resize-vertical" 
+                                      placeholder="Please describe your inquiry or interest in OptiPros..."></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-primary-foreground py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                            <i class="fas fa-eye text-accent-foreground text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold">OptiPros</span>
+                    </div>
+                    <p class="text-primary-foreground/80 mb-4">
+                        Empowering independence through innovative optical prosthetic technology. A Final Year Project dedicated to advancing assistive technology for the visually impaired community.
+                    </p>
+                    <p class="text-primary-foreground/70 text-sm">
+                        <i class="fas fa-university mr-2"></i>
+                        COMSATS University Lahore | Final Year Project 2024
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-primary-foreground/80 hover:text-accent transition-colors">Features</a></li>
+                        <li><a href="#technology" class="text-primary-foreground/80 hover:text-accent transition-colors">Technology</a></li>
+                        <li><a href="#gallery" class="text-primary-foreground/80 hover:text-accent transition-colors">Gallery</a></li>
+                        <li><a href="#team" class="text-primary-foreground/80 hover:text-accent transition-colors">Team</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Project Focus</h4>
+                    <ul class="space-y-2 text-primary-foreground/80">
+                        <li><i class="fas fa-eye mr-2"></i>Assistive Technology</li>
+                        <li><i class="fas fa-brain mr-2"></i>AI Innovation</li>
+                        <li><i class="fas fa-shield-alt mr-2"></i>Privacy Protection</li>
+                        <li><i class="fas fa-heart mr-2"></i>Accessibility</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
+                <p class="text-primary-foreground/70">
+                    &copy; 2024 OptiPros | COMSATS University Lahore | Final Year Project
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        })();
+
+        // Contact form handling
+        (function() {
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic form validation
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value.trim();
+                
+                if (!name || !email || !subject || !message) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                // TODO: Implement actual form submission logic
+                alert('Thank you for your inquiry! We will get back to you soon.');
+                contactForm.reset();
+            });
+        })();
+
+        // Smooth scrolling for navigation links
+        (function() {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80; // Account for fixed header
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+
+        // Add scroll effect to navigation
+        (function() {
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.classList.add('bg-background/95');
+                } else {
+                    nav.classList.remove('bg-background/95');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

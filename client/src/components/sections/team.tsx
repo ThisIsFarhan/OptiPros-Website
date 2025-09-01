@@ -1,5 +1,6 @@
-import { Users } from "lucide-react";
+import { Users, Linkedin, Mail, GraduationCap, Award, User, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import teamData from "@/data/team.json";
 
 export default function Team() {
   const scrollToSection = (sectionId: string) => {
@@ -9,77 +10,105 @@ export default function Team() {
     }
   };
 
-  const teamMembers = [
-    {
-      name: "Ahmed Hassan",
-      role: "Lead Developer & Project Manager",
-      description: "Computer Science student specializing in AI and machine learning. Leading the development of on-device AI models and system integration.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMJA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300",
-      alt: "Team member - Lead Developer and Project Manager",
-    },
-    {
-      name: "Fatima Ali",
-      role: "Hardware Engineer & UX Researcher",
-      description: "Electronics Engineering student focused on sensor integration and user experience design. Conducts user research with visually impaired community.",
-      image: "https://pixabay.com/get/g097b1efc3fcbf582b8badb176b78a44616ab934f34985d1f4f42e32d41438cff1cdf5f0ef00e9d72f6a694c967320ef4e410a43a5a479475bdd819432e52988d_1280.jpg",
-      alt: "Team member - Hardware Engineer and UX Researcher",
-    },
-    {
-      name: "Muhammad Zain",
-      role: "Software Engineer & AI Specialist",
-      description: "Software Engineering student specializing in computer vision and natural language processing. Develops text recognition and scene description algorithms.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMJA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300",
-      alt: "Team member - Software Engineer and AI Specialist",
-    },
-    {
-      name: "Aisha Khan",
-      role: "Research Coordinator & Testing Lead",
-      description: "Biomedical Engineering student coordinating research activities and conducting comprehensive testing with user groups and accessibility experts.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMJA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300",
-      alt: "Team member - Research Coordinator and Testing Lead",
-    },
-    {
-      name: "Omar Sheikh",
-      role: "Data Analyst & Quality Assurance",
-      description: "Computer Science student focusing on data analysis, performance optimization, and quality assurance for all three operational modes.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMJA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300",
-      alt: "Team member - Data Analyst and Quality Assurance",
-    },
-    {
-      name: "Dr. Sarah Ahmed",
-      role: "Project Supervisor & Academic Advisor",
-      description: "Associate Professor of Computer Science with expertise in assistive technologies and human-computer interaction. FYP supervisor and research mentor.",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMJA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300",
-      alt: "Team member - Project Supervisor and Academic Advisor",
-    },
-  ];
+  const { teamMembers, supervisor } = teamData;
+  const allMembers = [...teamMembers, supervisor];
 
   return (
-    <section id="team" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="team" className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-30"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Team</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-medium mb-6">
+            <Users className="w-4 h-4 mr-2" />
+            Meet Our Team
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Passionate Innovators
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Meet the dedicated team of students and researchers from COMSATS University Lahore working to revolutionize assistive technology.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
-            <div key={index} className="bg-card rounded-xl p-6 border border-border text-center" data-testid={`team-member-${index}`}>
-              <img
-                src={member.image}
-                alt={member.alt}
-                className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
-              />
-              <h3 className="text-xl font-semibold text-card-foreground mb-2">{member.name}</h3>
-              <p className="text-accent mb-3">{member.role}</p>
-              <p className="text-muted-foreground text-sm mb-4">{member.description}</p>
-              <p className="text-xs text-muted-foreground">COMSATS University Lahore</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {allMembers.map((member, index) => (
+            <div
+              key={member.id}
+              className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200/50 transition-all duration-500 hover:shadow-xl"
+              data-testid={`team-member-${member.id}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {/* Profile Image or Placeholder */}
+              {member.profileImage ? (
+                <div className="relative">
+                  <img
+                    src={member.profileImage}
+                    alt={`${member.name}`}
+                    className="w-full h-64 object-contain group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ) : (
+                <div className="relative h-64 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <User className="w-10 h-10 text-gray-400" />
+                  </div>
+                </div>
+              )}
+
+              {/* Member Information */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
+                <p className="text-blue-600 font-medium mb-2">{member.role}</p>
+                <p className="text-gray-600 text-sm mb-2">{member.department}</p>
+                <p className="text-gray-500 text-xs">CUI Lahore, Pakistan</p>
+
+                {/* Social Links */}
+                <div className="flex space-x-3 mt-4">
+                  {member.github && (
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-gray-800 hover:bg-gray-900 text-white border-0"
+                      onClick={() => window.open(member.github, '_blank')}
+                    >
+                      <Github className="w-4 h-4 mr-2" />
+                      GitHub
+                    </Button>
+                  )}
+                  {member.linkedin && (
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white border-0"
+                      onClick={() => window.open(member.linkedin, '_blank')}
+                    >
+                      <Linkedin className="w-4 h-4 mr-2" />
+                      LinkedIn
+                    </Button>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
+        {/* University info */}
+        <div className="text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-200/50">
+          <div className="flex items-center justify-center mb-4">
+            <GraduationCap className="w-8 h-8 text-blue-600 mr-3" />
+            <h3 className="text-2xl font-bold text-gray-900">COMSATS University Lahore</h3>
+          </div>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            This project is being developed as a Final Year Project (FYP) at COMSATS University Lahore,
+            one of Pakistan's leading institutions for technology and engineering education.
+          </p>
+          <Button variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50">
+            Learn More About COMSATS
+          </Button>
+        </div>
       </div>
     </section>
   );
